@@ -1,8 +1,6 @@
 #SET BASE
 From centos:7 as build
 
-#Install Java
-RUN yum -y install java-11-openjdk-devel
 
 #Project locator
 RUN mkdir /projectart
