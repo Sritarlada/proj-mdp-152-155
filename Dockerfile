@@ -11,6 +11,7 @@ COPY . /projectart
 
 #BUILD
 RUN yum -y install maven
+RUN mvn clean package
 RUN mvn package
 
 #Deploy
