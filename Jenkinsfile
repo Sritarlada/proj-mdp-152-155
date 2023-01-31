@@ -3,7 +3,7 @@ pipeline{
 	agent any
 
 	environment {
-		DOCKERHUB_CREDENTIALS=credentials('sritarlada-dockerhub')
+		DOCKERHUB_CREDENTIALS = credentials('sritarlada-dockerhub')
 	}
 
 	stages {
