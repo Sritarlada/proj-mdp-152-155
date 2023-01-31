@@ -15,5 +15,5 @@ RUN mvn package
 
 #Deploy
 FROM tomcat:8.0
-COPY --from=build /projectart/target/WebAppCal-1.3.5.war /usr/local/tomcat/webapps
+COPY --from=build /projectart/target/*.war /usr/local/tomcat/webapps
 
