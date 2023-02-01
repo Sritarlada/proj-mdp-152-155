@@ -2,6 +2,10 @@ pipeline {
 
 	agent any
 
+	environment {
+		DOCKERHUB_CREDENTIALS = credentials('sritarlada-dockerhub')
+	}
+
 	stages {
 
    		stage('remove docker container') {
@@ -32,7 +36,7 @@ pipeline {
 	    stage('Login') {
 
 			steps {
-				sh 'docker login -u sritarlada --password-stdin'
+				sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
 			}
 		}
 
