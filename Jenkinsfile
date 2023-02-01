@@ -19,7 +19,7 @@ pipeline {
 		stage('Build docker image') {
 
 			steps { 
-                sh 'docker build -f Dockerfile -t jcal .'
+                sh 'docker build -f Dockerfile -t sritarlada/jcal .'
             }
         }
 
@@ -43,7 +43,7 @@ pipeline {
 	    stage('Push') {
 
 			steps {
-				sh 'docker push jcal'
+				sh 'docker push sritarlada/jcal'
 			}
 		}
     }
