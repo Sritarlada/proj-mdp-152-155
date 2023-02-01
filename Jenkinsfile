@@ -35,7 +35,7 @@ pipeline {
         stage('build docker container') {
 
 			steps { 
-                sh 'docker container run -dt --name jcal -p 8081:8080 sritarlada/dopro'
+                sh 'docker container run -dt --name jcal -p 8081:8080 /home/centos/dopro'
             }
         }
 		
