@@ -4,36 +4,59 @@ pipeline {
 
 	stages {
 
-		stage('Build') {
+		stage('Build docker image') {
 
-			steps {
-				sh 'docker image rm -f jcal'
-				sh 'docker build -f Dockerfile -t jcal .'
-				sh 'docker image ls'
-				sh 'docker container rm -f jcal'
-				sh 'docker container run -dt --name jcal -p 8081:8080 sritarlada/dopro'
-			}
+			steps { 
+                sh 'docker build -f Dockerfile -t jcal .'
+            }
+        }
+
+        stage('remove docker image') {
+
+			steps { 
+                sh 'docker image rm -f jcal'
+            }
+        }
+
+        stage('list docker image') {
+
+			steps { 
+                sh 'docker image ls'
+            }
+        }
+        
+        stage('remove docker container') {
+
+			steps { 
+                sh 'docker container rm -f jcal'
+            }
+        }
+				
+        stage('build docker container') {
+
+			steps { 
+                sh 'docker container run -dt --name jcal -p 8081:8080 sritarlada/dopro'
+            }
+        }
 		}
 
-		stage('Login') {
+	stage('Login') {
 
 			steps {
 				sh 'docker login -u sritarlada --password sri@tarlada14'
 			}
 		}
 
-		stage('Push') {
+	stage('Push') {
 
 			steps {
 				sh 'docker push jcal'
 			}
 		}
-	}
 
 	post {
 		always {
 			sh 'docker logout'
 		}
 	}
-
 }
