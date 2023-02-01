@@ -1,6 +1,5 @@
 #SET BASE
-From centos:7 as build
-
+From maven:3.5.4-jdk-8-alpine AS build
 
 #Project locator
 RUN mkdir /projectart
@@ -10,11 +9,10 @@ WORKDIR /projectart
 COPY . /projectart
 
 #BUILD
-RUN yum -y install maven
-RUN mvn clean package
+RUN mvn dependency:go-offline -B
 RUN mvn package
 
 #Deploy
 FROM tomcat:8.0
-COPY --from=build /projectart/target/*.war /usr/local/tomcat/webapps
+COPY . /projectart/target/*.war /usr/local/tomcat/webapps
 
