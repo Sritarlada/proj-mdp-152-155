@@ -2,7 +2,19 @@ pipeline {
 
 	agent any
 
+	environment {
+		DOCKERHUB_CREDENTIALS = credentials('sritarlada-dockerhub')
+	}
+
 	stages {
+
+   		stage('remove docker container') {
+
+			steps { 
+                sh 'docker container rm -f jcal'
+            }
+        }
+      
 
 		stage('Build docker image') {
 
@@ -11,48 +23,29 @@ pipeline {
             }
         }
 
-        stage('remove docker image') {
-
-			steps { 
-                sh 'docker image rm -f jcal'
-            }
-        }
-
-        stage('list docker image') {
-
-			steps { 
-                sh 'docker image ls'
-            }
-        }
-        
-        stage('remove docker container') {
-
-			steps { 
-                sh 'docker container rm -f jcal'
-            }
-        }
+              
 				
         stage('build docker container') {
 
 			steps { 
-                sh 'docker container run -dt --name jcal -p 8081:8080 /home/centos/dopro'
+                sh 'docker container run -dt --name jcal -p 8081:8080 home/centos/dopro'
             }
         }
-		
-	    stage('Login') {
+		}
+
+	stage('Login') {
 
 			steps {
-				sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u sritarlada --password sri@tarlada14'
+				sh 'docker login -u sritarlada --password sri@tarlada14'
 			}
 		}
 
-	    stage('Push') {
+	stage('Push') {
 
 			steps {
 				sh 'docker push jcal'
 			}
 		}
-    }
 
 	post {
 		always {
