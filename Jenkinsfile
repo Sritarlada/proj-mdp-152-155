@@ -46,7 +46,7 @@ pipeline {
 	    stage('Login') {
 
 			steps {
-				sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u sritarlada --password sri@tarlada14'
+				sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password sri@tarlada14'
 			}
 		}
 
@@ -56,11 +56,11 @@ pipeline {
 				sh 'docker push jcal'
 			}
 		}
+    }
 
-	    post {
+	post {
 		always {
 			sh 'docker logout'
 		}
 	}
-}
 }
