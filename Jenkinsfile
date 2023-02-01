@@ -2,10 +2,6 @@ pipeline {
 
 	agent any
 
-	environment {
-		DOCKERHUB_CREDENTIALS = credentials('sritarlada-dockerhub')
-	}
-
 	stages {
 
    		stage('remove docker container') {
