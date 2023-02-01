@@ -42,8 +42,7 @@ pipeline {
                 sh 'docker container run -dt --name jcal -p 8081:8080 sritarlada/dopro'
             }
         }
-		}
-
+		
 	    stage('Login') {
 
 			steps {
@@ -63,4 +62,5 @@ pipeline {
 			sh 'docker logout'
 		}
 	}
+}
 }
