@@ -2,11 +2,7 @@ pipeline{
 
 	agent any
 
-	environment {
-		DOCKERHUB_CREDENTIALS = credentials('sritarlada-dockerhub')
-	}
-
-	stages {
+	 stages {
 
 		stage('Build') {
 
