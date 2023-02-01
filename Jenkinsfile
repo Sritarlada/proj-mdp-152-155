@@ -31,25 +31,26 @@ pipeline {
                 sh 'docker container run -dt --name jcal -p 8081:8080 home/centos/dopro'
             }
         }
-		}
+		
 
-	stage('Login') {
+	    stage('Login') {
 
 			steps {
 				sh 'docker login -u sritarlada --password sri@tarlada14'
 			}
 		}
 
-	stage('Push') {
+	    stage('Push') {
 
 			steps {
 				sh 'docker push jcal'
 			}
 		}
-
+    }
 	post {
 		always {
 			sh 'docker logout'
 		}
 	}
 }
+
