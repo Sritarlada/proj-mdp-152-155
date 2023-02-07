@@ -22,7 +22,7 @@
        remote_src: yes
 
    - name: Installing AWS CLI
-     command: ./aws/install
+     command: ./aws/install --update
 
    - name: Downloading KOPS
      get_url:
