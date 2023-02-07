@@ -1,7 +1,7 @@
 ---
  - name: Creating K8S Master
    hosts: all
-   beacome: yes
+   become: yes
    gather_facts: false
 
    tasks:
