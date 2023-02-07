@@ -12,7 +12,7 @@
 
    - name: Downloading AWS CLI ZIP FILE
      get url:
-      url: https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip
+      url: https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip
       dest: /home/centos/
 
    - name: Unziping AWS CLI
@@ -28,18 +28,17 @@
      get url:
       url: https://github.com/kubernetes/kops/releases/tag/v1.25.3/kops-linux-amd64
       dest: /usr/local/bin/kops
-      command: chmod +x /usr/local/bin/kops
+      
+   - name: Kops pathway
+     command: chmod +x /usr/local/bin/kops
 
    - name: Downloading KUBECTL
      get url:
       url: https://dl.k8s.io/release/v1.26.1/bin/linux/amd64/kubectl
       dest: /usr/local/bin/kubectl
-      command: chmod +x /usr/local/bin/kubectl
-
-   - name: Generate SSH KEY
-     openssh_keypair:
-      path: /home/centos/.ssh/id_rsa
-      state: present
+      
+   - name: kubectl pathway
+     command: chmod +x /usr/local/bin/kubectl
 
    - name: create k8s cluster
      shell: Kops create cluster --state=s3://ansik8s --zones=eu-west-1a, eu-west-1b --node-count=2 --name=k8smaster.k8s.cluster --yes --ssh-public-key=/home/centos/keys.pub
