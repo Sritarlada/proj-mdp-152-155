@@ -4,5 +4,5 @@
    
    tasks:
    - name: delete k8s cluster
-     shell: kops delete cluster --state=s3://ansik8s --name=ansik8smaster.k8s.cluster --yes
+     shell: /usr/local/bin/kops delete cluster --state=s3://ansik8s --name=ansik8smaster.k8s.cluster --yes
 ...
