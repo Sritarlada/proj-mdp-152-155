@@ -1,10 +1,8 @@
 ---
  - name: Deleting K8S cluster
    hosts: all
-   become: yes
-   gather_facts: false
-
+   
    tasks:
-   - name: create k8s cluster
+   - name: delete k8s cluster
      shell: kops delete cluster --state=s3://ansik8s --name=ansik8smaster.k8s.cluster --yes
 ...
