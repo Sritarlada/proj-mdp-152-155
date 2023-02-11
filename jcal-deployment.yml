@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: calculator-deployment
   labels:
-     app: Java-calculator
+     app: java-calculator
      type: CI/CD
 spec:
   template:
