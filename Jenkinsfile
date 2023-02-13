@@ -49,7 +49,7 @@ pipeline {
 		stage('Deploy to K8s')
 		{
 			steps{
-				sh 'scp -r -o StrictHostKeyChecking=no jcal-deployment.yml username@10.0.0.12:/path'
+				sh 'scp -r -o StrictHostKeyChecking=no jcal-deployment.yml username@10.0.0.12:/~'
 					
 					script{
 						try{
