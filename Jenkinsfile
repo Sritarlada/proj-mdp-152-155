@@ -46,11 +46,30 @@ pipeline {
 				sh 'docker push sritarlada/jcal'
 			}
 		}
+		stage('Deploy to K8s')
+		{
+			steps{
+				sshagent(['k8s-jenkins'])
+				{
+					sh 'scp -r -o StrictHostKeyChecking=no jcal-deployment.yml username@10.0.0.12:/~'	
+					script{
+						try{
+							sh 'ssh username@10.0.0.12 kubectl apply -f /home/centos/jcal-deployment.yml --kubeconfig=/path/kube.yaml'
+
+							}catch(error)
+						{
+
+						}
+							
+					}
+				}
+			}
+		}
+	}
+
     }
 	post {
 		always {
 			sh 'docker logout'
 		}
 	}
-}
-
