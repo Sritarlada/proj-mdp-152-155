@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: calculator-deployment
+  labels:
+     app: java-calculator
+     type: CI/CD
+spec:
+  template:
+     metadata:
+       name: jcal-pod
+       labels: 
+         app: calculator-app
+         type: CI/CD
+     spec:
+         containers:
+           - name: jcal
+             image: "sritarlada/jcal"
+  replicas: 2
+  selector:
+    matchLabels:
+      type: CI/CD
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: jcal-service
+spec:
+  selector:
+    app: jcalapp
+  type: LoadBalancer  
+  ports:
+    - protocol: TCP
+      targetPort: 8082
+      port: 80
+      nodePort: 8082
